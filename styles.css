@@ -1,0 +1,271 @@
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and general styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #183668; /* Light gray-blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevent overflow when modal opens */
+}
+
+.todo-container {
+    background-color: #dbdada;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Ensures the app doesn't get too wide on large screens */
+    transition: all 0.5s ease;
+}
+
+h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+    font-size: 55px;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="date"],
+textarea,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="date"]:focus {
+    border-color: #3c8dbc; /* Focus color */
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+}
+
+button {
+    background-color: #3c8dbc; /* Formal blue color */
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #08416d; /* Darker blue on hover */
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #222222;
+    color: rgb(0, 0, 0);
+}
+
+.dark-mode .todo-container {
+    background-color: #424242;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="date"],
+.dark-mode textarea,
+.dark-mode button {
+    background-color: #333;
+    color: rgb(255, 255, 255);
+    border: 1px solid #444;
+}
+
+.dark-mode .remove-btn {
+    background-color: #dc3545;
+}
+
+.dark-mode .remove-btn:hover {
+    background-color: #c82333;
+}
+
+button#dark-mode-toggle {
+    background-color: #272727;
+    color: #888;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* Tasks List */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Animations on Task Add/Remove */
+li.added {
+    animation: slide-in 0.5s ease-out;
+}
+
+li.removed {
+    animation: slide-out 0.5s ease-in;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+li.low {
+    background-color: #c9ffc9; /* Light green */
+}
+
+li.medium {
+    background-color: #fff1c5; /* Light yellow */
+}
+
+li.high {
+    background-color: #ffcaca; /* Light red */
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+button.remove-btn {
+    background-color: #dc3545;
+    color: rgb(255, 255, 255);
+    padding: 5px 10px; /* You can adjust this if needed */
+    width: 100px; /* Set the width to a fixed size */
+    height: 30px; /* Set the height to a fixed size */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-overflow: ellipsis; /* Ensure long text doesn't overflow */
+    overflow: hidden; /* Hide any content that exceeds the button size */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+
+button.remove-btn:hover {
+    background-color: #c82333;
+}
+
+.due-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 10px;
+}
+
+/* Popup Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: rgb(141, 139, 139);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    animation: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+button#close-modal-btn {
+    background-color: #3c8dbc;
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#close-modal-btn:hover {
+    background-color: #2878b5;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .todo-container {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    input[type="text"], input[type="date"], button {
+        font-size: 14px;
+    }
+
+    textarea {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .todo-container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
